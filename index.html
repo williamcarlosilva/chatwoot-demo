@@ -27,12 +27,6 @@
       g.async = true;
       s.parentNode.insertBefore(g,s);
       g.onload = function() {
-
-        window.$chatwoot.setUser("demo-user-001", {
-          name: "Visitante Demo",
-          email: "visitante@demo.com"
-        });
-        
         window.chatwootSDK.run({
           websiteToken: "QVLHPAUbRZP85DpL3YRcGvM7",
           baseUrl: BASE_URL
