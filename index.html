@@ -34,5 +34,35 @@
       };
     })(document,"script");
   </script>
+
+  <script>
+  (function () {
+    function setVh() {
+      // altura real do viewport visível (melhor quando teclado abre)
+      var vv = window.visualViewport;
+      var h = (vv && vv.height) ? vv.height : window.innerHeight;
+      document.documentElement.style.setProperty('--vvh', h + 'px');
+    }
+
+    setVh();
+    window.addEventListener('resize', setVh);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', setVh);
+      window.visualViewport.addEventListener('scroll', setVh);
+    }
+  })();
+</script>
+
+<style>
+  /* ajuda o layout a não “pular” com teclado */
+  html, body {
+    height: 100%;
+    overflow-x: hidden;
+  }
+  body {
+    min-height: var(--vvh, 100vh);
+  }
+</style>
+
 </body>
 </html>
