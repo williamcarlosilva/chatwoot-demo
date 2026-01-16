@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Demo Chat – Chatwoot + IA</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Demo de Chat com IA</h1>
+  <p>
+    Este é um ambiente de teste do chat integrado com IA.
+    Clique no ícone no canto inferior direito para conversar.
+  </p>
+
+  <script>
+    (function(d,t) {
+      var BASE_URL = "https://app.chatwoot.com";
+      var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      g.src = BASE_URL + "/packs/js/sdk.js";
+      g.defer = true;
+      g.async = true;
+      s.parentNode.insertBefore(g,s);
+      g.onload = function() {
+        window.chatwootSDK.run({
+          websiteToken: "QVLHPAUbRZP85DpL3YRcGvM7",
+          baseUrl: BASE_URL
+        });
+      };
+    })(document,"script");
+  </script>
+</body>
+</html>
