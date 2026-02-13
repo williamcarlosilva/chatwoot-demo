@@ -43,7 +43,7 @@
   })(document,"script");
 
   window.addEventListener("chatwoot:ready", function () {
-    var magentoCustomerId = window.MAGENTO_CUSTOMER_ID || "123456789";
+    var magentoCustomerId = window.MAGENTO_CUSTOMER_ID || "";
 
     if (magentoCustomerId) {
       window.$chatwoot.setCustomAttributes({
