@@ -44,7 +44,7 @@
 
   // ✅ Quando o chat estiver pronto, seta atributos do contato
   window.addEventListener("chatwoot:ready", function () {
-    var magentoCustomerId = window.MAGENTO_CUSTOMER_ID || 1234;
+    var magentoCustomerId = window.MAGENTO_CUSTOMER_ID || "";
 
     if (magentoCustomerId) {
       window.$chatwoot.setCustomAttributes({
