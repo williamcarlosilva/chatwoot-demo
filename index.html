@@ -54,13 +54,26 @@ window.addEventListener("chatwoot:ready", function () {
 
   setTimeout(() => {
 
-    console.log("IFRAMES");
-    console.log(document.querySelectorAll("iframe"));
+    const icon = document.getElementById("woot-widget-bubble-icon");
 
-    console.log("BUBBLES");
-    console.log(document.querySelectorAll(".woot-widget-bubble"));
+    if (icon) {
+      icon.outerHTML = `
+        <span id="custom-leaf-icon"
+              style="
+                width:24px;
+                height:24px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                font-size:22px;
+                color:white;
+              ">
+          🌿
+        </span>
+      `;
+    }
 
-  }, 3000);
+  }, 1000);
 
 });
 </script>
