@@ -4,19 +4,44 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1, viewport-fit=cover" />
   <title>Demo Chat – Chatwoot + IA</title>
+
   <style>
     body {
       font-family: Arial, sans-serif;
       padding: 40px;
     }
 
-      /* Correção mobile – Chatwoot */
-  #chatwoot-widget-container {
-    bottom: env(safe-area-inset-bottom, 0px) !important;
-  }
-    
+    /* Correção mobile – Chatwoot */
+    #chatwoot-widget-container {
+      bottom: env(safe-area-inset-bottom, 0px) !important;
+    }
+
+    /* Ajuste de espaçamento do bubble expandido */
+    .woot-widget-bubble.woot-widget--expanded {
+      padding-left: 18px !important;
+      padding-right: 18px !important;
+      gap: 8px !important;
+    }
+
+    /* Ajuste do ícone de folha */
+    #custom-leaf-icon {
+      margin-left: 2px !important;
+      margin-right: 6px !important;
+      flex-shrink: 0;
+    }
+
+    /* Ajuda o layout a não “pular” com teclado */
+    html, body {
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      min-height: var(--vvh, 100vh);
+    }
   </style>
 </head>
+
 <body>
   <h1>Demo de Chat com IA</h1>
   <p>
@@ -24,88 +49,80 @@
     Clique no ícone no canto inferior direito para conversar.
   </p>
 
-<script>
-  window.chatwootSettings = {"position":"right","type":"expanded_bubble","launcherTitle":"Fale conosco!"};
+  <script>
+    window.chatwootSettings = {
+      position: "right",
+      type: "expanded_bubble",
+      launcherTitle: "Fale conosco!"
+    };
 
-  (function(d,t) {
-    var BASE_URL="https://app.chatwoot.com";
-    var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-    g.src=BASE_URL+"/packs/js/sdk.js";
-    g.async = true;
-    s.parentNode.insertBefore(g,s);
+    (function(d,t) {
+      var BASE_URL = "https://app.chatwoot.com";
+      var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
 
-    g.onload=function(){
-      window.chatwootSDK.run({
-        websiteToken: '5vzRovqwJhvzwCYT7gHHX4Fs',
-        baseUrl: BASE_URL
-      });
-    }
-  })(document,"script");
+      g.src = BASE_URL + "/packs/js/sdk.js";
+      g.async = true;
+      s.parentNode.insertBefore(g,s);
 
-window.addEventListener("chatwoot:ready", function () {
+      g.onload = function() {
+        window.chatwootSDK.run({
+          websiteToken: "5vzRovqwJhvzwCYT7gHHX4Fs",
+          baseUrl: BASE_URL
+        });
+      };
+    })(document,"script");
 
-  var magentoCustomerId = window.MAGENTO_CUSTOMER_ID || "";
+    window.addEventListener("chatwoot:ready", function () {
 
-  if (magentoCustomerId) {
-    window.$chatwoot.setCustomAttributes({
-      magento_customer_id: magentoCustomerId
+      var magentoCustomerId = window.MAGENTO_CUSTOMER_ID || "";
+
+      if (magentoCustomerId) {
+        window.$chatwoot.setCustomAttributes({
+          magento_customer_id: magentoCustomerId
+        });
+      }
+
+      setTimeout(function () {
+        const icon = document.getElementById("woot-widget-bubble-icon");
+
+        if (icon) {
+          icon.outerHTML = `
+            <span id="custom-leaf-icon"
+                  style="
+                    width:24px;
+                    height:24px;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    font-size:22px;
+                    color:white;
+                    line-height:1;
+                  ">
+              🌿
+            </span>
+          `;
+        }
+      }, 1000);
+
     });
-  }
-
-  setTimeout(() => {
-
-    const icon = document.getElementById("woot-widget-bubble-icon");
-
-    if (icon) {
-      icon.outerHTML = `
-        <span id="custom-leaf-icon"
-              style="
-                width:24px;
-                height:24px;
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                font-size:22px;
-                color:white;
-              ">
-          🌿
-        </span>
-      `;
-    }
-
-  }, 1000);
-
-});
-</script>
+  </script>
 
   <script>
-  (function () {
-    function setVh() {
-      // altura real do viewport visível (melhor quando teclado abre)
-      var vv = window.visualViewport;
-      var h = (vv && vv.height) ? vv.height : window.innerHeight;
-      document.documentElement.style.setProperty('--vvh', h + 'px');
-    }
+    (function () {
+      function setVh() {
+        var vv = window.visualViewport;
+        var h = (vv && vv.height) ? vv.height : window.innerHeight;
+        document.documentElement.style.setProperty("--vvh", h + "px");
+      }
 
-    setVh();
-    window.addEventListener('resize', setVh);
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', setVh);
-      window.visualViewport.addEventListener('scroll', setVh);
-    }
-  })();
-</script>
+      setVh();
+      window.addEventListener("resize", setVh);
 
-<style>
-  /* ajuda o layout a não “pular” com teclado */
-  html, body {
-    height: 100%;
-    overflow-x: hidden;
-  }
-  body {
-    min-height: var(--vvh, 100vh);
-  }
-</style>
-
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener("resize", setVh);
+        window.visualViewport.addEventListener("scroll", setVh);
+      }
+    })();
+  </script>
 </body>
 </html>
