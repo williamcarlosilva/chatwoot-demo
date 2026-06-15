@@ -42,15 +42,27 @@
     }
   })(document,"script");
 
-  window.addEventListener("chatwoot:ready", function () {
-    var magentoCustomerId = window.MAGENTO_CUSTOMER_ID || "";
+window.addEventListener("chatwoot:ready", function () {
 
-    if (magentoCustomerId) {
-      window.$chatwoot.setCustomAttributes({
-        magento_customer_id: magentoCustomerId
-      });
-    }
-  });
+  var magentoCustomerId = window.MAGENTO_CUSTOMER_ID || "";
+
+  if (magentoCustomerId) {
+    window.$chatwoot.setCustomAttributes({
+      magento_customer_id: magentoCustomerId
+    });
+  }
+
+  setTimeout(() => {
+
+    console.log("IFRAMES");
+    console.log(document.querySelectorAll("iframe"));
+
+    console.log("BUBBLES");
+    console.log(document.querySelectorAll(".woot-widget-bubble"));
+
+  }, 3000);
+
+});
 </script>
 
   <script>
